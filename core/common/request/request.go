@@ -98,7 +98,7 @@ func readHeaderFromFile(headerFile string) http.Header {
     return h
 }
 
-//point to a json file
+// AddHeaderFile: point to a json file
 /* xxx.json
 {
 	"User-Agent":"curl/7.19.3 (i386-pc-win32) libcurl/7.19.3 OpenSSL/1.0.0d",

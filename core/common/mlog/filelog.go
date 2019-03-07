@@ -29,7 +29,7 @@ func LogInst() *filelog {
     return flog
 }
 
-// The InitFilelog is init the flog.
+// InitFilelog is init the flog.
 func InitFilelog(isopen bool, fp string) {
     if !isopen {
         flog = &filelog{}
@@ -87,7 +87,7 @@ func (this *filelog) LogError(str string) {
     this.log("[ERROR]", str)
 }
 
-// LogError logs normal info.
+// LogInfo: logs normal info.
 func (this *filelog) LogInfo(str string) {
     this.log("[INFO]", str)
 }

@@ -14,23 +14,23 @@ func NewResourceManageChan(num uint) *ResourceManageChan {
     return &ResourceManageChan{mc: mc, capnum: num}
 }
 
-// The GetOne apply for one resource.
+// GetOne: apply for one resource.
 // If resource pool is empty, current coroutine will be blocked.
 func (this *ResourceManageChan) GetOne() {
     this.mc <- 1
 }
 
-// The FreeOne free resource and return it to resource pool.
+// FreeOne: free resource and return it to resource pool.
 func (this *ResourceManageChan) FreeOne() {
     <-this.mc
 }
 
-// The Has query for how many resource has been used.
+// Has: query for how many resource has been used.
 func (this *ResourceManageChan) Has() uint {
     return uint(len(this.mc))
 }
 
-// The Left query for how many resource left in the pool.
+// Left: query for how many resource left in the pool.
 func (this *ResourceManageChan) Left() uint {
     return this.capnum - uint(len(this.mc))
 }

@@ -40,7 +40,7 @@ type Spider struct {
     sleeptype      string
 }
 
-// Spider is scheduler module for all the other modules, like downloader, pipeline, scheduler and etc.
+// NewSpider: Spider is scheduler module for all the other modules, like downloader, pipeline, scheduler and etc.
 // The taskname could be empty string too, or it can be used in Pipeline for record the result crawled by which task;
 func NewSpider(pageinst page_processer.PageProcesser, taskname string) *Spider {
     mlog.StraceInst().Open()
@@ -72,13 +72,13 @@ func (this *Spider) Taskname() string {
     return this.taskname
 }
 
-// Deal with one url and return the PageItems.
+// Get: Deal with one url and return the PageItems.
 func (this *Spider) Get(url string, respType string) *page_items.PageItems {
     req := request.NewRequest(url, respType, "", "GET", "", nil, nil, nil, nil)
     return this.GetByRequest(req)
 }
 
-// Deal with several urls and return the PageItems slice.
+// GetAll: Deal with several urls and return the PageItems slice.
 func (this *Spider) GetAll(urls []string, respType string) []*page_items.PageItems {
     for _, u := range urls {
         req := request.NewRequest(u, respType, "", "GET", "", nil, nil, nil, nil)
@@ -93,7 +93,7 @@ func (this *Spider) GetAll(urls []string, respType string) []*page_items.PageIte
     return pip.GetCollected()
 }
 
-// Deal with one url and return the PageItems with other setting.
+// GetByRequest: Deal with one url and return the PageItems with other setting.
 func (this *Spider) GetByRequest(req *request.Request) *page_items.PageItems {
     var reqs []*request.Request
     reqs = append(reqs, req)
@@ -104,7 +104,7 @@ func (this *Spider) GetByRequest(req *request.Request) *page_items.PageItems {
     return nil
 }
 
-// Deal with several urls and return the PageItems slice
+// GetAllByRequest: Deal with several urls and return the PageItems slice
 func (this *Spider) GetAllByRequest(reqs []*request.Request) []*page_items.PageItems {
     // push url
     for _, req := range reqs {
@@ -194,7 +194,7 @@ func (this *Spider) GetThreadnum() uint {
     return this.threadnum
 }
 
-// If exit when each crawl task is done.
+// SetExitWhenComplete: If exit when each crawl task is done.
 // If you want to keep spider in memory all the time and add url from outside, you can set it true.
 func (this *Spider) SetExitWhenComplete(e bool) *Spider {
     this.exitWhenComplete = e
@@ -205,7 +205,7 @@ func (this *Spider) GetExitWhenComplete() bool {
     return this.exitWhenComplete
 }
 
-// The OpenFileLog initialize the log path and open log.
+// OpenFileLog: initialize the log path and open log.
 // If log is opened, error info or other useful info in spider will be logged in file of the filepath.
 // Log command is mlog.LogInst().LogError("info") or mlog.LogInst().LogInfo("info").
 // Spider's default log is closed.
@@ -221,26 +221,26 @@ func (this *Spider) OpenFileLogDefault() *Spider {
     return this
 }
 
-// The CloseFileLog close file log.
+// CloseFileLog: close file log.
 func (this *Spider) CloseFileLog() *Spider {
     mlog.InitFilelog(false, "")
     return this
 }
 
-// The OpenStrace open strace that output progress info on the screen.
+// OpenStrace: open strace that output progress info on the screen.
 // Spider's default strace is opened.
 func (this *Spider) OpenStrace() *Spider {
     mlog.StraceInst().Open()
     return this
 }
 
-// The CloseStrace close strace.
+// CloseStrace: close strace.
 func (this *Spider) CloseStrace() *Spider {
     mlog.StraceInst().Close()
     return this
 }
 
-// The SetSleepTime set sleep time after each crawl task.
+// SetSleepTime: set sleep time after each crawl task.
 // The unit is millisecond.
 // If sleeptype is "fixed", the s is the sleep time and e is useless.
 // If sleeptype is "rand", the sleep time is rand between s and e.
@@ -305,7 +305,7 @@ func (this *Spider) AddUrlsEx(urls []string, respType string, headerFile string,
     return this
 }
 
-// add Request to Schedule
+// AddRequest adds Request to Schedule
 func (this *Spider) AddRequest(req *request.Request) *Spider {
     if req == nil {
         mlog.LogInst().LogError("request is nil")

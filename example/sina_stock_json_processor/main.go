@@ -22,7 +22,7 @@ func NewMyPageProcesser() *MyPageProcesser {
     return &MyPageProcesser{}
 }
 
-// Parse html dom here and record the parse result that we want to crawl.
+// Process: Parse html dom here and record the parse result that we want to crawl.
 // Package simplejson (https://github.com/bitly/go-simplejson) is used to parse data of json.
 func (this *MyPageProcesser) Process(p *page.Page) {
     if !p.IsSucc() {

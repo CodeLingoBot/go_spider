@@ -57,12 +57,12 @@ func (this *Page) GetHeader() http.Header {
     return this.header
 }
 
-// SetHeader save the cookies of http responce
+// SetCookies: save the cookies of http responce
 func (this *Page) SetCookies(cookies []*http.Cookie) {
     this.cookies = cookies
 }
 
-// GetHeader returns the cookies of http responce
+// GetCookies returns the cookies of http responce
 func (this *Page) GetCookies() []*http.Cookie {
     return this.cookies
 }
@@ -149,13 +149,13 @@ func (this *Page) AddTargetRequestsWithProxy(urls []string, respType string, pro
     return this
 }
 
-// AddTargetRequest adds one new Request with header file for waitting for crawl.
+// AddTargetRequestWithHeaderFile adds one new Request with header file for waitting for crawl.
 func (this *Page) AddTargetRequestWithHeaderFile(url string, respType string, headerFile string) *Page {
     this.targetRequests = append(this.targetRequests, request.NewRequestWithHeaderFile(url, respType, headerFile))
     return this
 }
 
-// AddTargetRequest adds one new Request waitting for crawl.
+// AddTargetRequestWithParams adds one new Request waitting for crawl.
 // The respType is "html" or "json" or "jsonp" or "text".
 // The urltag is name for marking url and distinguish different urls in PageProcesser and Pipeline.
 // The method is POST or GET.
@@ -167,7 +167,7 @@ func (this *Page) AddTargetRequestWithParams(req *request.Request) *Page {
     return this
 }
 
-// AddTargetRequests adds new Requests waitting for crawl.
+// AddTargetRequestsWithParams adds new Requests waitting for crawl.
 func (this *Page) AddTargetRequestsWithParams(reqs []*request.Request) *Page {
     for _, req := range reqs {
         this.AddTargetRequestWithParams(req)
@@ -202,7 +202,7 @@ func (this *Page) GetHtmlParser() *goquery.Document {
     return this.docParser
 }
 
-// GetHtmlParser returns goquery object binded to target crawl result.
+// ResetHtmlParser returns goquery object binded to target crawl result.
 func (this *Page) ResetHtmlParser() *goquery.Document {
     r := strings.NewReader(this.body)
     var err error
@@ -220,7 +220,7 @@ func (this *Page) SetJson(js *simplejson.Json) *Page {
     return this
 }
 
-// SetJson returns json result.
+// GetJson returns json result.
 func (this *Page) GetJson() *simplejson.Json {
     return this.jsonMap
 }

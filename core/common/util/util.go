@@ -30,7 +30,7 @@ func JsonpToJson(json string) string {
     return regDetail.ReplaceAllString(json, "\"$1\":")
 }
 
-// The GetWDPath gets the work directory path.
+// GetWDPath gets the work directory path.
 func GetWDPath() string {
     wd := os.Getenv("GOPATH")
     if wd == "" {
@@ -39,7 +39,7 @@ func GetWDPath() string {
     return wd
 }
 
-// The IsDirExists judges path is directory or not.
+// IsDirExists: judges path is directory or not.
 func IsDirExists(path string) bool {
     fi, err := os.Stat(path)
 
@@ -52,7 +52,7 @@ func IsDirExists(path string) bool {
     panic("util isDirExists not reached")
 }
 
-// The IsFileExists judges path is file or not.
+// IsFileExists: judges path is file or not.
 func IsFileExists(path string) bool {
     fi, err := os.Stat(path)
 
@@ -65,13 +65,13 @@ func IsFileExists(path string) bool {
     panic("util isFileExists not reached")
 }
 
-// The IsNum judges string is number or not.
+// IsNum: judges string is number or not.
 func IsNum(a string) bool {
     reg, _ := regexp.Compile("^\\d+$")
     return reg.MatchString(a)
 }
 
-// simple xml to string  support utf8
+// XML2mapstr: simple xml to string  support utf8
 func XML2mapstr(xmldoc string) map[string]string {
     var t xml.Token
     var err error
@@ -97,7 +97,7 @@ func XML2mapstr(xmldoc string) map[string]string {
     return m
 }
 
-//string to hash
+// MakeHash: string to hash
 func MakeHash(s string) string {
     const IEEE = 0xedb88320
     var IEEETable = crc32.MakeTable(IEEE)
